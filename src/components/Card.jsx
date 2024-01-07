@@ -2,10 +2,11 @@ import React from 'react'
 import { FaRegFileCode } from "react-icons/fa";
 import { MdOutlineDownload } from "react-icons/md";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { motion } from "framer-motion"
 
-function Card({data}) {
+function Card({data, reference}) {
   return (
-    <div className='relative flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-900/90 text-white px-8 py-10 overflow-hidden'>
+    <motion.div drag dragConstraints={reference} whileDrag={{scale: 1.2}} className='relative flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-900/90 text-white px-8 py-10 overflow-hidden'>
 
       <FaRegFileCode></FaRegFileCode>
 
@@ -26,9 +27,9 @@ function Card({data}) {
        </div>
          {
            data.tag.isOpen && (
-            <div className='tag w-full py-4 bg-green-600 flex items-center justify-center'>
+            <div className={`tag w-full py-4 ${data.tag.tagColor === "blue" ? "bg-blue-600" : "bg-green-600"}  flex items-center justify-center`}>
 
-            <h3 className='text-sm font-semibold'>Download Now</h3>
+            <a href="/public/Md. Neaz Morshed.pdf" target='_blank'><h3 className='text-sm font-semibold'>{data.tag.tagTitle}</h3></a>
     
              </div>
            ) }
@@ -36,7 +37,7 @@ function Card({data}) {
 
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 
